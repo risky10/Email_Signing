@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Successful</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    Document Uploaded
+</header>
+
+<div class="success-container">
+    <div class="success-icon">✔</div>
+
+    <h2>Your document "{{ filename }}" was uploaded!</h2>
+    <p>A signing link has been sent.</p>
+
+    <a class="home-btn" href="/">Return Home</a>
+</div>
+
+</body>
+</html>

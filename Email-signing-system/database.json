@@ -1,0 +1,14 @@
+{
+    "136311fb-0095-48e1-93d7-2c08bd00ef15": {
+        "path": "incoming_docs\\136311fb-0095-48e1-93d7-2c08bd00ef15.pdf",
+        "filename": "Racun-PP1-MB-9-2.pdf",
+        "sender": "Luka Skodlar <skodlar.luka@gmail.com>",
+        "signed": false
+    },
+    "83b1f294-a6cf-4d72-8be6-56fcd9033cf7": {
+        "path": "incoming_docs\\83b1f294-a6cf-4d72-8be6-56fcd9033cf7.pdf",
+        "filename": "brencic590.pdf",
+        "sender": "skodlar.luka@gmail.com",
+        "signed": true
+    }
+}
