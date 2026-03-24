@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document Signed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    Document Signed Successfully
+</header>
+
+<div class="success-container">
+    <div class="success-icon">✔</div>
+
+    <h2>Your document has been signed!</h2>
+    <p>A copy has been emailed back to the sender.</p>
+
+    <div class="success-buttons">
+        <a class="download-btn" href="/signed/{{ signed_filename }}" download>
+            Download Signed PDF
+        </a>
+
+        <a class="home-btn" href="/">
+            Return Home
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

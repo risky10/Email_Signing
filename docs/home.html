@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home – Document Signing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="main-header">
+    <div class="header-inner">
+
+        <div class="header-left"></div>
+
+        <div class="header-title">Welcome to the Signing Portal</div>
+
+        {% if user_email %}
+        <div class="header-user">
+            Logged in as {{ user_email }}
+            <a href="/logout" class="change-email">Change email</a>
+        </div>
+        {% endif %}
+    </div>
+
+</header>
+
+
+<div class="upload-container">
+    <h2>Upload a Document for Signing</h2>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data" class="upload-form">
+
+        <label>Select PDF:</label>
+        <input type="file" name="pdf" accept="application/pdf" required>
+
+        <button type="submit" class="sign-btn">Send for Signing</button>
+    </form>
+</div>
+
+
+<div class="documents-container">
+
+    <h2>Documents Waiting for Signature</h2>
+
+    {% if docs %}
+        <ul class="doc-list">
+            {% for doc_id, doc in docs.items() %}
+                <li class="doc-item">
+                    <div>
+                        <strong>{{ doc.filename }}</strong><br>
+                        <span>From: {{ doc.sender }}</span>
+                    </div>
+
+                    <a class="sign-btn" href="/sign/{{ doc_id }}">Sign</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No documents available.</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
