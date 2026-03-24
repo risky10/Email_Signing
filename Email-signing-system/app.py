@@ -6,6 +6,8 @@ from flask import send_from_directory
 from storage import save_document
 from email_sender import send_signing_link
 import uuid
+import subprocess
+import sys
 import os, base64
 
 app = Flask(__name__)
@@ -48,10 +50,9 @@ def logout():
     session.pop("email", None)
     return redirect("/login")
 
-
 @app.route("/upload", methods=["POST"])
 def upload():
-    sender = request.form["sender"]
+    user_email = session.get("email")  # signer’s email from login
     file = request.files["pdf"]
 
     if not file or file.filename == "":
@@ -59,18 +60,14 @@ def upload():
 
     original_filename = file.filename
 
-    # Create a unique ID for this document
-    doc_id = str(uuid.uuid4())
+    # Save temporarily
+    temp_id = str(uuid.uuid4())
+    temp_path = os.path.join("incoming_docs", f"{temp_id}.pdf")
+    file.save(temp_path)
 
-    # Save the PDF
-    save_path = os.path.join("incoming_docs", f"{doc_id}.pdf")
-    file.save(save_path)
-
-    # Store in database
-    save_document(doc_id, save_path, sender, original_filename)
-
-    # Send signing link
-    send_signing_link(sender, doc_id)
+    # Send email to your signing inbox
+    from email_sender import send_pdf_to_signing_inbox
+    send_pdf_to_signing_inbox(temp_path, user_email, original_filename)
 
     return render_template("upload_success.html", filename=original_filename)
 
@@ -133,4 +130,6 @@ def submit_signature():
     return render_template("signed_success.html", doc_id=doc_id, signed_filename=signed_filename)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    subprocess.Popen([sys.executable, "email_receiver.py"])
+
+    app.run(debug=True, use_reloader=False)

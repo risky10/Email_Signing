@@ -6,6 +6,23 @@ body {
     display: block; /* important: stop centering all children */
 }
 
+header {
+    display: flex;
+    align-self: stretch;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin-top: 15px;
+    font-size: 25px;
+}
+
+h2 {
+    display: flex;
+    align-self: stretch;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
 
 header.main-header {
     width: 100%;
@@ -90,14 +107,21 @@ button.clear-btn:hover {
 }
 
 .pdf-preview {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
     margin-top: 40px;
-    width: 80%;
-    max-width: 800px;
+    
 }
 
 .pdf-preview embed {
     border: 1px solid #ccc;
     border-radius: 8px;
+    width: 80%;
+    max-width: 1000px;
+    align-self: center;
 }
 
 .success-container {
@@ -231,6 +255,15 @@ button.clear-btn:hover {
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+.login-form input {
+    padding: 12px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #656868;
 }
 
 .header-user .change-email {
